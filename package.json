@@ -1,7 +1,19 @@
 {
-  "name": "vite_react_shadcn_ts",
+  "name": "pack-swiftly",
   "private": true,
-  "version": "0.0.0",
+  "version": "1.0.0",
+  "description": "Professional delivery management platform with real-time tracking and analytics",
+  "keywords": ["delivery", "logistics", "tracking", "management", "react", "vite"],
+  "author": "Pack Swiftly Team",
+  "license": "MIT",
+  "homepage": "https://pack-swiftly.com",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pack-swiftly/pack-swiftly.git"
+  },
+  "bugs": {
+    "url": "https://github.com/pack-swiftly/pack-swiftly/issues"
+  },
   "type": "module",
   "scripts": {
     "dev": "vite",
