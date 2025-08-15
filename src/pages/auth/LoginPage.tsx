@@ -5,23 +5,46 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Separator } from "@/components/ui/separator";
 import { Package, Eye, EyeOff, User } from "lucide-react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { DEMO_CREDENTIALS } from "@/lib/demo-credentials";
 
 export default function LoginPage() {
   const [showPassword, setShowPassword] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+  const navigate = useNavigate();
 
   const fillDemoCredentials = () => {
     setEmail(DEMO_CREDENTIALS.email);
     setPassword(DEMO_CREDENTIALS.password);
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Handle login logic here
-    console.log("Login attempt:", { email, password });
+    setIsLoading(true);
+
+    try {
+      // Simulate API call delay
+      await new Promise(resolve => setTimeout(resolve, 1000));
+      
+      // Simple authentication logic
+      if (email && password) {
+        // Store auth state in localStorage for demo purposes
+        localStorage.setItem('isAuthenticated', 'true');
+        localStorage.setItem('userEmail', email);
+        
+        // Navigate to dashboard
+        navigate('/dashboard');
+      } else {
+        alert('Please enter both email and password');
+      }
+    } catch (error) {
+      console.error('Login error:', error);
+      alert('Login failed. Please try again.');
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -115,8 +138,9 @@ export default function LoginPage() {
                 type="submit" 
                 className="w-full bg-gradient-primary shadow-elegant hover:shadow-lg"
                 size="lg"
+                disabled={isLoading}
               >
-                Sign In
+                {isLoading ? "Signing In..." : "Sign In"}
               </Button>
             </form>
 
